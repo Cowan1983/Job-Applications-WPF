@@ -6,7 +6,44 @@
         xmlns:local="clr-namespace:Job_Applications_WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+
+    <Window.DataContext>
+        <local:JobLeadsViewModel/>
+    </Window.DataContext>
+
     <Grid>
-        
+
+        <DataGrid x:Name="JobLeadDataGrid" 
+                  AutoGenerateColumns="False" 
+                  Margin="10"
+                  ItemsSource ="{Binding JobGridData}" 
+                  SelectedItem ="{Binding SelectedJobLead, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                  SelectionMode="Single" 
+                  CanUserAddRows="False"
+                  RowHeaderWidth="0"                  
+                  >
+            
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="LobLeadID" Visibility="Collapsed" Binding="{Binding Path=JobLeadID}"/>
+                <DataGridTextColumn Header="Job Title" Width="*" Binding="{Binding Path=JobTitle, Mode=OneWay}" />
+                <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Path=Date, Mode=OneWay}" />
+                <DataGridTextColumn Header="Ref 1" Width="*" Binding="{Binding Path=Ref_One, Mode=OneWay}" />
+                <DataGridTextColumn Header="Ref 2" Width="*" Binding="{Binding Path=Ref_Two, Mode=OneWay}" />
+                <DataGridTextColumn Header="Ref 3" Width="*" Binding="{Binding Path=Ref_Three, Mode=OneWay}" />
+                <DataGridTextColumn Header="Employer" Width="*" Binding="{Binding Path=EmployerBroker.Name, Mode=OneWay}" />
+                <DataGridTextColumn Header="Agency" Width="*" Binding="{Binding Path=AgencyBroker.Name, Mode=OneWay}" />
+                <DataGridTextColumn Header="Contact" Width="*" Binding="{Binding Path=AgencyContact.Name.FullName, Mode=OneWay}" />
+            </DataGrid.Columns>
+
+            <DataGrid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding OpenJobLeadCommand}" />
+            </DataGrid.InputBindings>
+
+        </DataGrid>
+
+
+
     </Grid>
+
 </Window>
