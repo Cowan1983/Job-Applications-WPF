@@ -61,13 +61,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BaseValueConverter.cs" />
+    <Compile Include="Converters\BindingTooltipConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\DateToBackgroundColour.cs" />
     <Compile Include="ExpressionHelpers.cs" />
     <Compile Include="JobLeadContext.cs" />
+    <Compile Include="Controls\JobLeadListControl.xaml.cs">
+      <DependentUpon>JobLeadListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\JobLeadItemControl.xaml.cs">
+      <DependentUpon>JobLeadItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\JobLeadItemViewModel.cs" />
+    <Compile Include="ViewModels\JobLeadListViewModel.cs" />
     <Compile Include="JobLeadRepo.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\JobLeadViewModel.cs" />
+    <Page Include="Controls\JobLeadListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\JobLeadItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="Job_Applications_WPF.JobLeadItemControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Job_Applications_WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+
+
+    <Border  BorderThickness="1 1 1 0"
+             Background="Wheat"
+             BorderBrush="Black"
+             Padding="0 0 0 0">
+        
+        <Grid VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Border BorderThickness="1 1 1 0"
+                    BorderBrush="Black"
+                    Grid.Column="0">
+            
+                <TextBlock  Text="{Binding JobTitle, FallbackValue=Title Placeholder}" 
+                            Foreground="Red"
+                            Grid.Column="0"
+                            x:Name="JobTitleText"
+                            Padding="5 0 5 0"
+                            VerticalAlignment="Top"
+                            
+                />
+                
+            </Border>
+            <!--<TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="1.2" ScaleY="1.2" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>-->
+
+
+
+
+            <Border BorderBrush="Black"
+                    BorderThickness="1 1 1 0"
+                    Grid.Column="1">
+                
+                <TextBlock  Text="{Binding Ref_One, FallbackValue=Refrence Placeholder}"
+                            Foreground="Blue"
+                            Grid.Column="1"
+                            x:Name="RefOneText"
+                            Padding="5 0 5 0"
+                            VerticalAlignment="Top" 
+                            
+                />
+            </Border>
+
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="1.2" ScaleY="1.2" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+
+            <Grid.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenJobLeadCommand}" />
+            </Grid.InputBindings>
+                        
+        </Grid>
+    </Border>
+</UserControl>
