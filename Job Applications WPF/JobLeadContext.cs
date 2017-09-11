@@ -9,7 +9,7 @@ namespace Job_Applications_WPF
         public JobLeadContext() : base("name=JobLeadContext")
         {
             //Activate automatic database restructuring if the data model changes.
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<JobLeadContext, Job_Applications_WPF.Migrations.Configuration>("JobLeadContext"));
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<JobLeadContext, Job_Applications_WPF.Migrations.Configuration>("JobLeadContext"));
         }
 
         public DbSet<Broker> Brokers { get; set; }
@@ -17,6 +17,7 @@ namespace Job_Applications_WPF
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Name> Names { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Note> Notes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

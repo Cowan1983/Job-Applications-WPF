@@ -17,6 +17,8 @@ namespace Job_Applications_WPF
         //If this is an Agency broker, this will be the list of employers they work with.
         //If this is an Employer broker, this will be the list of agencies they work with
         public List<Broker> Brokers { get; set; } = new List<Broker>();
+
+        public List<Note> BrokerNotes { get; set; } = new List<Note>();
         
         //This list seems to be required for EF to behave?
         //public List<JobLead> JobLeads { get; set; }

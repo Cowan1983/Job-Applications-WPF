@@ -19,8 +19,8 @@ namespace Job_Applications_WPF
         public string City { get; set; }
         public string BodyText { get; set; }
 
-        public List<Broker> Brokers { get; set; }
-        public List<Contact> Contacts { get; set; }
+        //public List<Broker> Brokers { get; set; }
+        //public List<Contact> Contacts { get; set; }
 
         //Constructor that takes all the address
         public Address(string myBodyText, string myCity, string myRegion, string myCountry, string myPostcode)

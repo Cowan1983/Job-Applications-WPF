@@ -268,8 +268,28 @@ namespace Job_Applications_WPF
 
                 }
 
-                //2 Job Leads
-                JobLead jobLead_01 = new JobLead();
+            Note jobNote_01 = new Note("First Job Note");
+            Note jobNote_02 = new Note("Second Job Note");
+            Note jobNote_03 = new Note("Third Job Note");
+            Note jobNote_04 = new Note("Fourth Job Note");
+            Note jobNote_05 = new Note("Fith Job Note");
+            Note jobNote_06 = new Note("Sixth Job Note");
+
+            using (var ctx = new JobLeadContext())
+            {
+                ctx.Notes.Add(jobNote_01);
+                ctx.Notes.Add(jobNote_02);
+                ctx.Notes.Add(jobNote_03);
+                ctx.Notes.Add(jobNote_04);
+                ctx.Notes.Add(jobNote_05);
+                ctx.Notes.Add(jobNote_06);
+
+                ctx.SaveChanges();
+            }
+
+
+            //2 Job Leads
+            JobLead jobLead_01 = new JobLead();
                 jobLead_01.JobTitle = ".NET Software Engineer";
                 jobLead_01.AgencyBroker = agencyBroker_01;
                 //jobLead_01.AgencyBrokerID = agencyBroker_01.BrokerID;
@@ -285,7 +305,10 @@ namespace Job_Applications_WPF
                 jobLead_01.Ref_Two = @"ABC-xyz-123";
                 jobLead_01.Ref_Three = @"JobOne Ref 3";
                 jobLead_01.Source = @"www.JobsNow.co.uk\002345\abc.aspx";
-                //jobLead_01.Status = jobLead_01.StatusList[2];
+                jobLead_01.Status = "Open";
+                jobLead_01.JobLeadNotes.Add(jobNote_01);
+                jobLead_01.JobLeadNotes.Add(jobNote_04);
+
 
                 JobLead jobLead_02 = new JobLead();
                 jobLead_02.JobTitle = "C# Developer";
@@ -303,7 +326,8 @@ namespace Job_Applications_WPF
                 jobLead_02.Ref_Two = @"JKL\004\TRW\09-34";
                 jobLead_02.Ref_Three = @"Job34-0034";
                 jobLead_02.Source = @"www.jobFinder.com\flax0034\job23.aspx";
-                //jobLead_02.Status = jobLead_01.StatusList[4];
+                jobLead_02.Status = "Suspended";
+                jobLead_02.JobLeadNotes.Add(jobNote_02);
 
                 using (var ctx = new JobLeadContext())
                 {
@@ -311,12 +335,15 @@ namespace Job_Applications_WPF
                 ctx.Contacts.Attach(jobLead_01.EmployerContact);
                 ctx.Brokers.Attach(jobLead_01.AgencyBroker);
                 ctx.Brokers.Attach(jobLead_01.EmployerBroker);
+                ctx.Notes.Attach(jobNote_01);
+                ctx.Notes.Attach(jobNote_04);
                 ctx.JobLeads.Add(jobLead_01);
 
                 ctx.Contacts.Attach(jobLead_02.AgencyContact);
                 ctx.Contacts.Attach(jobLead_02.EmployerContact);
                 ctx.Brokers.Attach(jobLead_02.AgencyBroker);
                 ctx.Brokers.Attach(jobLead_02.EmployerBroker);
+                ctx.Notes.Attach(jobNote_02);
                 ctx.JobLeads.Add(jobLead_02);
 
                     ctx.SaveChanges();
@@ -372,14 +399,22 @@ namespace Job_Applications_WPF
                 jobLead_03.Ref_Two = @"JKL\012\TRW\09-23";
                 jobLead_03.Ref_Three = @"Job09-0023";
                 jobLead_03.Source = @"www.jobFinder.com\flax0034\job090023.aspx";
+                jobLead_03.Status = "Closed";
+                jobLead_03.JobLeadNotes.Add(jobNote_03);
+                jobLead_03.JobLeadNotes.Add(jobNote_05);
+                jobLead_03.JobLeadNotes.Add(jobNote_06);
 
-                using (var ctx = new JobLeadContext())
+
+            using (var ctx = new JobLeadContext())
                 {
 
                 ctx.Contacts.Attach(jobLead_03.AgencyContact);
                 ctx.Contacts.Attach(jobLead_03.EmployerContact);
                 ctx.Brokers.Attach(jobLead_03.AgencyBroker);
                 ctx.Brokers.Attach(jobLead_03.EmployerBroker);
+                ctx.Notes.Attach(jobNote_03);
+                ctx.Notes.Attach(jobNote_05);
+                ctx.Notes.Attach(jobNote_06);
 
                 ctx.JobLeads.Add(jobLead_03);
 

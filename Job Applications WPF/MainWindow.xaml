@@ -74,13 +74,153 @@
                                 Command="{Binding ExpandSearchCommand}"
                                 />
                     </StackPanel>
-                        <StackPanel Visibility="{Binding SearchVisible, Converter={local:BooleanToVisibilityConverter}}">
-                            <TextBlock Text="First Serach Value"/>
-                            <TextBlock Text="Second Search Value" />
+                        <StackPanel Visibility="{Binding SearchVisible, Converter={local:BooleanToVisibilityConverter}}"
+                                    Margin="5 5 5 5">
+
+                            <Grid Name="SearchGrid">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <CheckBox Name="JobTitleActive"
+                                          Grid.Row="0"
+                                          Grid.Column="0" 
+                                          IsChecked="{Binding Path=SearchJobTitleActive}"/>
+                                
+                                <TextBlock Text="Job Title: "
+                                           Grid.Row="0"
+                                           Grid.Column="1"/>
+
+                                <TextBox Name="JobTitle"
+                                         IsEnabled="{Binding Path=SearchJobTitleActive}"
+                                         Text="{Binding Path=SearchJobTitle}"
+                                         Margin="5 5 5 5"
+                                         Grid.Row="0"
+                                         Grid.Column="2"/>
+
+                                <CheckBox Name="JobRefActive"
+                                          Grid.Row="1"
+                                          Grid.Column="0" 
+                                          IsChecked="{Binding Path=SearchJobRefereneceActive}"/>
+
+                                <TextBlock Text="Job Reference: "
+                                           Grid.Row="1"
+                                           Grid.Column="1"/>
+                                
+                                <TextBox Name="JobRef"
+                                         Text="{Binding Path=SearchReferenceValue}"
+                                         Margin="5 5 5 5" 
+                                         Grid.Row="1"
+                                         Grid.Column="2"
+                                         IsEnabled="{Binding Path=SearchJobRefereneceActive}"/>
+
+                                <CheckBox Name="AgancyNameActive"
+                                          Grid.Row="2"
+                                          Grid.Column="0"
+                                          IsChecked="{Binding Path=SearchAgencyNameActive}"/>
+
+                                <TextBlock Text="Agency Name: "
+                                           Grid.Row="2"
+                                           Grid.Column="1"/>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="2"
+                                            Grid.Column="2"
+                                            IsEnabled ="{Binding Path=SearchAgencyNameActive}">
+
+                                    <ComboBox ItemsSource="{Binding Path=AgencyBrokers}"
+                                              DisplayMemberPath="Name"
+                                              SelectedValuePath="Name"
+                                              SelectedValue="{Binding Path=SearchAgencyName}"                                          
+                                              Width="300"
+                                              HorizontalAlignment="left"
+                                              />
+                                    
+                                    <Button Content="Clear"
+                                            Command="{Binding ClearSearchAgencyCommand}"/>
+                                    
+                                </StackPanel>
+
+                                <CheckBox Name="EmployerNameActive"
+                                          Grid.Row="3"
+                                          Grid.Column="0"
+                                          IsChecked="{Binding Path=SearchEmployerNameActive}"/>
+
+                                <TextBlock Text="Employer Name: "
+                                           Grid.Row="3"
+                                           Grid.Column="1"/>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="3"
+                                            Grid.Column="2"
+                                            IsEnabled="{Binding Path=SearchEmployerNameActive}">
+
+                                    <ComboBox ItemsSource="{Binding Path=EmployerBrokers}"
+                                              DisplayMemberPath="Name"
+                                              SelectedValuePath="Name"
+                                              SelectedValue="{Binding Path=SearchEmployerName}"
+                                              Grid.Row="3"
+                                              Grid.Column="1"
+                                              Width="300"
+                                              HorizontalAlignment="left"/>
+
+                                    <Button Content="Clear"
+                                            Command="{Binding ClearSearchEmployerCommand}"/>
+
+                                </StackPanel>
+
+                                <CheckBox Name="DateRangeActive"
+                                          Grid.Row="4"
+                                          Grid.Column="0"
+                                          IsChecked="{Binding Path=SearchDateActive}"/>
+                                
+                                <TextBlock Text="Start Date: "
+                                           Grid.Row="4"
+                                           Grid.Column="1" />
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="4"
+                                            Grid.Column="2"
+                                            IsEnabled="{Binding Path=SearchDateActive}">
+
+                                    <DatePicker HorizontalAlignment="Left"                                        
+                                                SelectedDate="{Binding Path=SearchStartDate}"                                             
+                                        />
+
+
+                                    <TextBlock Text="EndDate: " />
+
+
+                                    <DatePicker HorizontalAlignment="Left"
+                                                SelectedDate="{Binding Path=SearchEndDate}"                                            
+                                        />
+
+                                </StackPanel>
+
+                            </Grid>
+
                             <Button Content="Search"
                                     Width="70"
+                                    Margin="5 5 5 5"
                                     HorizontalAlignment="Left"
                                     Command="{Binding DoSearchCommand}"/>
+                            <Button Content="Reset"
+                                    Width="70"
+                                    Margin="5 5 5 5"
+                                    HorizontalAlignment="Left"
+                                    Command="{Binding ShowAllLeadsCommand}"/>
                         </StackPanel>
                     </StackPanel>
 
@@ -100,7 +240,8 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="LobLeadID" Visibility="Collapsed" Binding="{Binding Path=JobLeadID}"/>
                             <DataGridTextColumn FontWeight="Bold" Foreground="Red" Header="Job Title" Width="*" Binding="{Binding Path=JobTitle, Mode=OneWay}"/>
-                            <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Path=Date, Mode=OneWay}">
+                            <DataGridTextColumn Header="Status" Width="*" Binding="{Binding Path=Status, Mode=OneWay}" />
+                            <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Path=Date, Mode=OneWay, StringFormat=dd/MM/yyyy}">
                                 <!-- Set the Data text colour based on the rules defined in the converter -->
                                 <DataGridTextColumn.CellStyle>
                                     <Style TargetType="DataGridCell">
@@ -114,6 +255,7 @@
                             <DataGridTextColumn Header="Employer" Width="*" Binding="{Binding Path=EmployerBroker.Name, Mode=OneWay}" />
                             <DataGridTextColumn Header="Agency" Width="*" Binding="{Binding Path=AgencyBroker.Name, Mode=OneWay}" />
                             <DataGridTextColumn Header="Contact" Width="*" Binding="{Binding Path=AgencyContact.Name.FullName, Mode=OneWay}" />
+                            <DataGridTextColumn Header="Notes" Width="*" Binding="{Binding Path=NotesCount, Mode=OneWay}" />
                         </DataGrid.Columns>
 
                         

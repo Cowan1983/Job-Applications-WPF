@@ -14,6 +14,7 @@ namespace Job_Applications_WPF
 
         public string JobTitle { get; set; }
         public string Source { get; set; }
+        public string Status { get; set; }
 
         //[ForeignKey ("Contact")]
         public int? AgencyContactID { get; set; }
@@ -35,13 +36,24 @@ namespace Job_Applications_WPF
         [ForeignKey("EmployerBrokerID")]
         public Broker EmployerBroker { get; set; }
 
+        //Declare the database column that will contain the job lead screen grab
+        [Column(TypeName = "image")]
+        public byte[] JobLeadImage { get; set; }
+
         public DateTime Date { get; set; }
+
         public string CVOrApplicationLocation { get; set; }
         public string CoverLetterLocation { get; set; }
         public string Ref_One { get; set; }
         public string Ref_Two { get; set; }
         public string Ref_Three { get; set; }
 
+        public List<Note> JobLeadNotes { get; set; } = new List<Note>();
+        
+        public int NotesCount
+        {
+            get { return JobLeadNotes.Count(); }
+        }
 
         public JobLead()
         {

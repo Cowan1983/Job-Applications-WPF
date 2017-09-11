@@ -18,7 +18,9 @@ namespace Job_Applications_WPF
         public string MiddleName { get; set; }
         public string Title { get; set; }
 
-        public List<Contact> Contacts { get; set; }
+        //Darn it! I don't know why I want a list of Contacts.
+        //Perhaps it was some kind of foreign key thing.
+        //public List<Contact> Contacts { get; set; }
 
         //Construtor that takes title, first, middle and last name
         public Name(string myTitle, string myFirstName, string myMiddleName, string mySurname)

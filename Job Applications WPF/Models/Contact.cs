@@ -35,6 +35,8 @@ namespace Job_Applications_WPF
         //public List<JobLead> JobLeads { get; set; }
         //public List<Broker> Brokers { get; set; }
 
+        public List<Note> ContactNotes { get; set; } = new List<Note>(); 
+
         //Default constructor
         public Contact() { }
 
