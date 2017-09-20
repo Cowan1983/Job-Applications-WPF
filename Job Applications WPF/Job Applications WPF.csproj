@@ -79,7 +79,10 @@
     <Compile Include="Controls\JobLeadItemControl.xaml.cs">
       <DependentUpon>JobLeadItemControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Models\Note.cs" />
+    <Compile Include="Converters\TabControlContentConverter.cs" />
+    <Compile Include="TabItem.cs" />
     <Compile Include="ViewModels\BrokersViewModel.cs" />
     <Compile Include="ViewModels\JobLeadItemViewModel.cs" />
     <Compile Include="ViewModels\JobLeadListViewModel.cs" />
