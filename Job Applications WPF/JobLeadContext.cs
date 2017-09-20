@@ -6,10 +6,11 @@ namespace Job_Applications_WPF
     class JobLeadContext : DbContext
     {
 
-        public JobLeadContext() : base("name=JobLeadContext")
+        //public JobLeadContext() : base("name=JobLeadContext")
+        public JobLeadContext() : base("JobLeadContext")
         {
             //Activate automatic database restructuring if the data model changes.
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<JobLeadContext, Job_Applications_WPF.Migrations.Configuration>("JobLeadContext"));
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<JobLeadContext, Job_Applications_WPF.Migrations.Configuration>("JobLeadContext"));
         }
 
         public DbSet<Broker> Brokers { get; set; }
