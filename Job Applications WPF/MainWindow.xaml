@@ -5,17 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Job_Applications_WPF"
         mc:Ignorable="d"
-        Title="Job Leads" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525">
 
     <Window.DataContext>
-        <local:MainWindowViewModel/>
+        <local:JobLeadsViewModel/>
     </Window.DataContext>
 
     <Grid>
-        
-        <TabControl ItemsSource="{Binding Tabs}">
+        <TabControl>
             
-            <!-- Use a gradiated background for the tab title to indicate the tab is the selected one -->
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -49,29 +47,301 @@
                     </Setter>
                 </Style>
             </TabControl.Resources>
+            
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="JobLeads" Foreground="Red"/>
+                </TabItem.Header>
 
-            <!-- Add in the tab item text -->
-            <TabControl.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Header}" />
-                </DataTemplate>
-            </TabControl.ItemTemplate>
+                <!--<local:JobLeadListControl/>-->
+                <local:JobLeadListControl />
 
-            <!-- Add in the specific user control to be shown -->
-            <TabControl.ContentTemplate>
-                <DataTemplate>
-                    <ContentPresenter Content="{Binding Type, Converter={local:TabControlContentConverter}}"
-                                      DataContext="{Binding ViewModel}" />
-                </DataTemplate>
-            </TabControl.ContentTemplate>
+                <!--<Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Row="0">
+                        <TextBlock Text="Search:"
+                                   Margin="5 5 5 5"
+                                   VerticalAlignment="Center"/>
+                        
+                        <Button Content="Expand"
+                                Width="70"
+                                HorizontalAlignment="Left"
+                                Margin="5 5 5 5"
+                                Command="{Binding ExpandSearchCommand}"
+                                />
+                    </StackPanel>
+                        <StackPanel Visibility="{Binding SearchVisible, Converter={local:BooleanToVisibilityConverter}}"
+                                    Margin="5 5 5 5">
+
+                            <Grid Name="SearchGrid">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <CheckBox Name="JobTitleActive"
+                                          Grid.Row="0"
+                                          Grid.Column="0" 
+                                          IsChecked="{Binding Path=SearchJobTitleActive}"/>
+                                
+                                <TextBlock Text="Job Title: "
+                                           Grid.Row="0"
+                                           Grid.Column="1"/>
+
+                                <TextBox Name="JobTitle"
+                                         IsEnabled="{Binding Path=SearchJobTitleActive}"
+                                         Text="{Binding Path=SearchJobTitle}"
+                                         Margin="5 5 5 5"
+                                         Grid.Row="0"
+                                         Grid.Column="2"/>
+
+                                <CheckBox Name="JobRefActive"
+                                          Grid.Row="1"
+                                          Grid.Column="0" 
+                                          IsChecked="{Binding Path=SearchJobRefereneceActive}"/>
+
+                                <TextBlock Text="Job Reference: "
+                                           Grid.Row="1"
+                                           Grid.Column="1"/>
+                                
+                                <TextBox Name="JobRef"
+                                         Text="{Binding Path=SearchReferenceValue}"
+                                         Margin="5 5 5 5" 
+                                         Grid.Row="1"
+                                         Grid.Column="2"
+                                         IsEnabled="{Binding Path=SearchJobRefereneceActive}"/>
+
+                                <CheckBox Name="AgancyNameActive"
+                                          Grid.Row="2"
+                                          Grid.Column="0"
+                                          IsChecked="{Binding Path=SearchAgencyNameActive}"/>
+
+                                <TextBlock Text="Agency Name: "
+                                           Grid.Row="2"
+                                           Grid.Column="1"/>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="2"
+                                            Grid.Column="2"
+                                            IsEnabled ="{Binding Path=SearchAgencyNameActive}">
+
+                                    <ComboBox ItemsSource="{Binding Path=AgencyBrokers}"
+                                              DisplayMemberPath="Name"
+                                              SelectedValuePath="Name"
+                                              SelectedValue="{Binding Path=SearchAgencyName}"                                          
+                                              Width="300"
+                                              HorizontalAlignment="left"
+                                              />
+                                    
+                                    <Button Content="Clear"
+                                            Command="{Binding ClearSearchAgencyCommand}"/>
+                                    
+                                </StackPanel>
+
+                                <CheckBox Name="EmployerNameActive"
+                                          Grid.Row="3"
+                                          Grid.Column="0"
+                                          IsChecked="{Binding Path=SearchEmployerNameActive}"/>
+
+                                <TextBlock Text="Employer Name: "
+                                           Grid.Row="3"
+                                           Grid.Column="1"/>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="3"
+                                            Grid.Column="2"
+                                            IsEnabled="{Binding Path=SearchEmployerNameActive}">
+
+                                    <ComboBox ItemsSource="{Binding Path=EmployerBrokers}"
+                                              DisplayMemberPath="Name"
+                                              SelectedValuePath="Name"
+                                              SelectedValue="{Binding Path=SearchEmployerName}"
+                                              Grid.Row="3"
+                                              Grid.Column="1"
+                                              Width="300"
+                                              HorizontalAlignment="left"/>
+
+                                    <Button Content="Clear"
+                                            Command="{Binding ClearSearchEmployerCommand}"/>
+
+                                </StackPanel>
+
+                                <CheckBox Name="DateRangeActive"
+                                          Grid.Row="4"
+                                          Grid.Column="0"
+                                          IsChecked="{Binding Path=SearchDateActive}"/>
+                                
+                                <TextBlock Text="Start Date: "
+                                           Grid.Row="4"
+                                           Grid.Column="1" />
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="4"
+                                            Grid.Column="2"
+                                            IsEnabled="{Binding Path=SearchDateActive}">
+
+                                    <DatePicker HorizontalAlignment="Left"                                        
+                                                SelectedDate="{Binding Path=SearchStartDate}"                                             
+                                        />
+
+
+                                    <TextBlock Text="EndDate: " />
+
+
+                                    <DatePicker HorizontalAlignment="Left"
+                                                SelectedDate="{Binding Path=SearchEndDate}"                                            
+                                        />
+
+                                </StackPanel>
+
+                            </Grid>
+
+                            <Button Content="Search"
+                                    Width="70"
+                                    Margin="5 5 5 5"
+                                    HorizontalAlignment="Left"
+                                    Command="{Binding DoSearchCommand}"/>
+                            <Button Content="Reset"
+                                    Width="70"
+                                    Margin="5 5 5 5"
+                                    HorizontalAlignment="Left"
+                                    Command="{Binding ShowAllLeadsCommand}"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <DataGrid x:Name="JobLeadDataGrid" 
+                            AutoGenerateColumns="False" 
+                            Margin="5"
+                            ItemsSource ="{Binding JobGridData}" 
+                            SelectedItem ="{Binding SelectedJobLead, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                            SelectionMode="Single" 
+                            CanUserAddRows="False"
+                            RowHeaderWidth="0" 
+                            Grid.Row="1"                  
+                            VerticalAlignment="Top"
+                            AlternatingRowBackground="LightBlue"                 
+                            >  
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="LobLeadID" Visibility="Collapsed" Binding="{Binding Path=JobLeadID}"/>
+                            <DataGridTextColumn FontWeight="Bold" Foreground="Red" Header="Job Title" Width="*" Binding="{Binding Path=JobTitle, Mode=OneWay}"/>
+                            <DataGridTextColumn Header="Status" Width="*" Binding="{Binding Path=Status, Mode=OneWay}" />
+                            <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Path=Date, Mode=OneWay, StringFormat=dd/MM/yyyy}">
+                                --><!-- Set the Data text colour based on the rules defined in the converter --><!--
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="Foreground" Value="{Binding Path=Date, Converter={local:DateToBackgroundColour}}" />
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Ref 1" Width="*" Binding="{Binding Path=Ref_One, Mode=OneWay}" />
+                            <DataGridTextColumn Header="Ref 2" Width="*" Binding="{Binding Path=Ref_Two, Mode=OneWay}" />
+                            <DataGridTextColumn Header="Ref 3" Width="*" Binding="{Binding Path=Ref_Three, Mode=OneWay}" />
+                            <DataGridTextColumn Header="Employer" Width="*" Binding="{Binding Path=EmployerBroker.Name, Mode=OneWay}" />
+                            <DataGridTextColumn Header="Agency" Width="*" Binding="{Binding Path=AgencyBroker.Name, Mode=OneWay}" />
+                            <DataGridTextColumn Header="Contact" Width="*" Binding="{Binding Path=AgencyContact.Name.FullName, Mode=OneWay}" />
+                            <DataGridTextColumn Header="Notes" Width="*" Binding="{Binding Path=NotesCount, Mode=OneWay}" />
+                        </DataGrid.Columns>
+
+                        
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                --><!-- Set a tooltip for the row constructed from elements in the row --><!--
+                                <Setter Property="ToolTip">
+                                    <Setter.Value>
+                                        <MultiBinding Converter="{local:BindingTooltipConverter}">
+                                            <Binding Path="JobTitle" />
+                                            <Binding Path="Ref_One" />
+                                        </MultiBinding>
+                                    </Setter.Value>
+                                </Setter>
+                                
+                                --><!-- Have the row flash TO DO Decide on the criteria for a flashing row --><!--
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=AgencyBrokerID}" Value="1">                                    
+                                        <DataTrigger.EnterActions>
+                                            <BeginStoryboard x:Name="BlinkingRow">
+                                                <Storyboard>
+                                                    <DoubleAnimation
+                                                        Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.5"
+                                                        RepeatBehavior="Forever" AutoReverse="True" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </DataTrigger.EnterActions>
+                                    </DataTrigger>
+                                </Style.Triggers>
+
+                            </Style>
+                        </DataGrid.RowStyle>
+
+                        
+
+                        <DataGrid.InputBindings>
+                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding OpenJobLeadCommand}" />
+                        </DataGrid.InputBindings>
+
+                </DataGrid>
+
+                    <StackPanel Orientation="Vertical"
+                                Grid.Row="2">
+                        <Button Content="New Lead"
+                            Width="70"
+                            HorizontalAlignment="Left"
+                            Margin="5 5 0 0"
+                            />
+                        <Button Content="New Broker"
+                            Width="70"
+                            HorizontalAlignment="Left"
+                            Margin="5 5 5 5"
+                            />
+                    </StackPanel>
+
+                </Grid>-->
+
+                <!--<local:JobLeadListControl
+                   Grid.Row="1"                   
+                   />-->
+                
+            </TabItem>
+            
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Agencies" Foreground="Blue"/>
+                </TabItem.Header>
+            </TabItem>
+
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Contacts" Foreground="Orange"/>
+                </TabItem.Header>
+            </TabItem>           
 
         </TabControl>
 
 
-        <!--<Grid.RowDefinitions>
+
+        <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>-->
+        </Grid.RowDefinitions>
 
     </Grid>
 
