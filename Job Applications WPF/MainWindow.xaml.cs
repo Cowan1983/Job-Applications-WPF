@@ -41,6 +41,8 @@ namespace Job_Applications_WPF
 
         private void RunTestData()
         {
+            
+            
             //using (var ctx = new JobLeadContext())
             //{
                 //12 Names
@@ -429,6 +431,8 @@ namespace Job_Applications_WPF
                 thisJobLead = ctx.JobLeads.Where(s => s.JobLeadID == 1).FirstOrDefault<JobLead>();
                 thisJobLead = ctx.JobLeads.Where(s => s.JobLeadID == 3).FirstOrDefault<JobLead>();
             }
+
+            
 
         }
         

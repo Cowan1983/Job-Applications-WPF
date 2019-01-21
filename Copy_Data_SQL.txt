@@ -1,0 +1,133 @@
+INSERT INTO [WPFJobLeadData].[dbo].[Names](
+[FirstName],
+[Surname],
+[MiddleName],
+[Title]
+)
+
+SELECT [FirstName]
+      ,[Surname]
+      ,[MiddleName]
+      ,[Title]
+  FROM [JobLeadDataTest].[dbo].[Names]
+
+
+
+INSERT INTO [WPFJobLeadData].[dbo].[Addresses](
+[Postcode],
+[Country],
+[Region],
+[City],
+[BodyText]
+)
+
+SELECT [Postcode]
+      ,[Country]
+      ,[Region]
+      ,[City]
+      ,[BodyText]
+  FROM [JobLeadDataTest].[dbo].[Addresses]
+
+
+INSERT INTO [WPFJobLeadData].[dbo].[Brokers](
+[IsAgency],
+[Name],
+[LandLineTelNo],
+[Website],
+[AddressID]
+)
+
+SELECT 
+       [IsAgency]
+      ,[Name]
+      ,[LandLineTelNo]
+      ,[Website]
+      ,[AddressID]
+  FROM [JobLeadDataTest].[dbo].[Brokers]
+
+
+
+INSERT INTO [WPFJobLeadData].[dbo].[BrokerAssociation](
+[BrokerID],
+[AssociatedBrokerID]
+)
+
+SELECT [BrokerID]
+      ,[AssociatedBrokerID]
+  FROM [JobLeadDataTest].[dbo].[BrokerAssociation]
+
+
+
+INSERT INTO [WPFJobLeadData].[dbo].[Contacts](
+[Position],
+[Email],
+[MobileTelNo],
+[LandLineTelNo],
+[AddressID],
+[NameID],
+[BrokerID]
+)
+
+SELECT [Position]
+      ,[Email]
+      ,[MobileTelNo]
+      ,[LandLineTelNo]
+      ,[AddressID]
+      ,[NameID]
+      ,[BrokerID]
+  FROM [JobLeadDataTest].[dbo].[Contacts]
+
+
+
+INSERT INTO [WPFJobLeadData].[dbo].[JobLeads](
+[JobTitle],
+[Source],
+[Status],
+[AgencyContactID],
+[EmployerContactID],
+[AgencyBrokerID],
+[EmployerBrokerID],
+[Date],
+[CVOrApplicationLocation],
+[CoverLetterLocation],
+[Ref_One],
+[Ref_Two],
+[Ref_Three],
+[JobLeadImage]
+)
+
+SELECT [JobTitle]
+      ,[Source]
+      ,[Status]
+      ,[AgencyContactID]
+      ,[EmployerContactID]
+      ,[AgencyBrokerID]
+      ,[EmployerBrokerID]
+      ,[Date]
+      ,[CVOrApplicationLocation]
+      ,[CoverLetterLocation]
+      ,[Ref_One]
+      ,[Ref_Two]
+      ,[Ref_Three]
+      ,[JobLeadImage]
+  FROM [JobLeadDataTest].[dbo].[JobLeads]
+
+
+
+
+INSERT INTO [WPFJobLeadData].[dbo].[Notes](
+[NoteText],
+[NoteDate],
+[Broker_BrokerID],
+[Contact_ContactID],
+[JobLead_JobLeadID]
+)
+
+SELECT [NoteText]
+      ,[NoteDate]
+      ,[Broker_BrokerID]
+      ,[Contact_ContactID]
+      ,[JobLead_JobLeadID]
+  FROM [JobLeadDataTest].[dbo].[Notes]
+
+
